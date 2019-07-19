@@ -75,12 +75,21 @@ for i, USGS_id in enumerate(USGS_id_list):
 # ]
 
 
+files_list = [
+r'F:/Volumes/frxstout/rep-1-sesh-190719-043643/frxst_pts_out.txt',  # chslp = x/y
+r'F:\Volumes\pocono_default_run\frxstout\rep-0-sesh-190719-054210\frxst_pts_out.txt' # chslp = y/x
+]
+
+
 
 files_list = [
-'F:/Volumes/nwm_runs/pocono_extreme_case/frxst_out/rep-0-sesh-190718-224259/frxst_pts_out.txt',
-'F:/Volumes/nwm_runs/pocono_extreme_case/frxst_out/rep-1-sesh-190718-224259/frxst_pts_out.txt',
-'F:/Volumes/nwm_runs/pocono_extreme_case/frxst_out/rep-2-sesh-190718-224259/frxst_pts_out.txt',
+'F:/Volumes/pocono_mannings_n/frxstout/rep-0-sesh-190718-232647/frxst_pts_out.txt',
+# 'F:/Volumes/pocono_mannings_n/frxstout/rep-1-sesh-190718-232647/frxst_pts_out.txt',
+'F:/Volumes/pocono_mannings_n/frxstout/rep-2-sesh-190718-232647/frxst_pts_out.txt',
+# 'F:/Volumes/pocono_mannings_n/frxstout/rep-3-sesh-190718-232647/frxst_pts_out.txt',
+'F:/Volumes/pocono_mannings_n/frxstout/rep-4-sesh-190718-232647/frxst_pts_out.txt'
 ]
+
 
 
 files_list = list(map(realpath, files_list))
@@ -111,7 +120,7 @@ for i, USGS_id in enumerate(USGS_id_list):
 # -------------------------------------- PLOT ------------------------------------------------------
 # --------------------------------------------------------------------------------------------------
 
-color_list = ['m', 'b', 'g', 'r', 'y', 'k']
+color_list = ['m', 'g', 'b', 'r', 'y', 'k']
 
 # TODO: Convert to functions
 for i, USGS_id in enumerate(USGS_id_list):

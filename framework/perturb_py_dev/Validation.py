@@ -7,7 +7,7 @@ import glob, os, sys
 import pandas as pd
 from datetime import datetime, timedelta
 import math
-# import HydroErr as he  # Library for goodness of fit functions, Note: it still misses some (e.g., PB, RSR...)
+import HydroErr as he  # Library for goodness of fit functions, Note: it still misses some (e.g., PB, RSR...)
 import requests
 sys.path.append('.')
 from metadataHandler import *
@@ -230,7 +230,7 @@ def masker(df, beg_date, end_date):
 
 
 # TODO: to be more generalized to handle any metrics that given to function as a list (not just the 4 current ones)...
-def report_perfomance_metrics(SimulatedStreamFlow, ObservedStreamFlow, reportfile_directory, runnumber = 1):
+def report_perfomance_metrics(SimulatedStreamFlow, ObservedStreamFlow, reportfile_directory, metadata, runnumber = 1):
     '''(SimulatedStreamFlowDataFrame, ObservedStreamFlowDataFrame, reportfile_directory)'''
     # Before using this function, the simulated and observed datframes must be processed to have dishcarge values
     # in same time span and at the same temporal resolution and same exact times.
@@ -247,20 +247,30 @@ def report_perfomance_metrics(SimulatedStreamFlow, ObservedStreamFlow, reportfil
     if runnumber == 1:
         printline = ''
         printline += printline + 'RunNumber,NSE,PB,RMSE,R_squared\n'
-        f = open(os.path.join(reportfile_directory, "PerfMetrReport.csv"), "w")
+        f = open(reportfile_directory, "w")
         f.writelines(printline)
         f.close()
 
     printline = ''
     printline += '\n'
-    printline = 'Run ' + str(runnumber) + ' ,'
+    printline = 'Run ' + str(runnumber) + ' ' + metadata + ' ,'
     printline += '{0:.3f},{1:.3f},{2:.3f},{3:.3f}' \
         .format(NSE, PercentBias, RMSE, R_squared)
 
     printline += '\n'
-    f = open(os.path.join(reportfile_directory, "PerfMetrReport.csv"), "a")
+    f = open(reportfile_directory, "a")
     f.writelines(printline)
     f.close()
 
     return NSE, PercentBias, RMSE, R_squared
 
+
+def ensemble_plot(dataframes_list):
+    '''
+    Input: List of dataframes from NWM
+    Output: Plots of dataframes
+
+    more explanation required
+    '''
+    if not type(dataframes_list) is list:
+        raise TypeError
